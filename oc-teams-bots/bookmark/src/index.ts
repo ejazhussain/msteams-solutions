@@ -1,8 +1,10 @@
 import * as restify from "restify";
 import { commandApp } from "./internal/initialize";
 import { TeamsBot } from "./teamsBot";
+
 const path = require("path");
 import "isomorphic-fetch";
+
 
 // This template uses `restify` to serve HTTP responses.
 // Create a restify server.
@@ -22,7 +24,7 @@ const teamsBot = new TeamsBot();
 server.post("/api/messages", async (req, res) => {
   await commandApp.requestHandler(req, res, async (context) => {
     await teamsBot.run(context);
-  });
+  })
 });
 
 server.get(

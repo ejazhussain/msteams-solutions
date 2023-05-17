@@ -4,8 +4,8 @@ import config from "./internal/config";
 const oboAuthConfig: OnBehalfOfCredentialAuthConfig = {
   authorityHost: config.authorityHost,
   clientId: config.clientId,
-  tenantId: config.tenantId,
   clientSecret: config.clientSecret,
+  tenantId: config.tenantId  
 };
 
 export default oboAuthConfig;

@@ -15,12 +15,12 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "teams-bot-bookmark-${{TEAMSFX_ENV}}",
-        "full": "Full name for teams-bot-bookmark"
+        "short": "BookmarkBot-${{TEAMSFX_ENV}}",
+        "full": "Full name for BookmarkBot"
     },
     "description": {
-        "short": "Short description of teams-bot-bookmark",
-        "full": "Full description of teams-bot-bookmark"
+        "short": "Short description of BookmarkBot",
+        "full": "Full description of BookmarkBot"
     },
     "accentColor": "#FFFFFF",
     "bots": [

@@ -1,9 +1,8 @@
 import { Activity, CardFactory, MessageFactory, TurnContext } from "botbuilder";
 import { CommandMessage, TeamsFxBotCommandHandler, TriggerPatterns } from "@microsoft/teamsfx";
 import { AdaptiveCards } from "@microsoft/adaptivecards-tools";
-import helloWorldCard from "../adaptiveCards/helloworldCommand.json";
-import { CardData } from "../cardModels";
-import config from "../internal/config";
+import helloWorldCard from "./adaptiveCards/helloworldCommand.json";
+import { CardData } from "./cardModels";
 
 /**
  * The `HelloWorldCommandHandler` registers a pattern with the `TeamsFxBotCommandHandler` and responds
@@ -18,7 +17,6 @@ export class HelloWorldCommandHandler implements TeamsFxBotCommandHandler {
   ): Promise<string | Partial<Activity> | void> {
     console.log(`App received message: ${message.text}`);
 
-    
     // Render your adaptive card for reply message
     const cardData: CardData = {
       title: "Your Hello World App is Running",

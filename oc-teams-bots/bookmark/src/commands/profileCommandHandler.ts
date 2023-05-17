@@ -1,6 +1,7 @@
 import { Activity, CardFactory, MessageFactory, TurnContext } from "botbuilder";
 import { CommandMessage, OnBehalfOfUserCredential, TeamsBotSsoPromptTokenResponse, TeamsFxBotCommandHandler, TeamsFxBotSsoCommandHandler, TriggerPatterns, createMicrosoftGraphClientWithCredential } from "@microsoft/teamsfx";
 import oboAuthConfig from "../authConfig";
+import config from "../internal/config";
 
 
 /**
@@ -17,6 +18,7 @@ export class ProfileCommandHandler implements TeamsFxBotSsoCommandHandler {
   ): Promise<string | Partial<Activity> | void> {
     await context.sendActivity("Retrieving user information from Microsoft Graph ...");
 
+    
     // Init OnBehalfOfUserCredential instance with SSO token
     const oboCredential = new OnBehalfOfUserCredential(tokenResponse.ssoToken, oboAuthConfig);
     // Add scope for your Azure AD app. For example: Mail.Read, etc.
