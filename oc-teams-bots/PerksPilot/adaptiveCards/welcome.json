@@ -1,0 +1,25 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Welcome to the Perks Pilot AI system"
+    },
+    {
+      "type": "TextBlock",
+      "text": "As an Artificial Intelligence system (AI), I have been trained to assist you in finding the appropriate information in regards to the Constoso Electronics employee handbook, corporate rules, employee benefits, and health insurance that you may need.",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Azure OpenAI Service",
+      "url": "https://azure.microsoft.com/en-gb/products/cognitive-services/openai-service"
+    }   
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4"
+}

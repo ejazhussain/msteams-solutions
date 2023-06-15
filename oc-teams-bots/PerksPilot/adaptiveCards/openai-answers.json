@@ -1,0 +1,28 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+      {
+          "type": "TextBlock",
+          "text": "${openAISummary}",
+          "wrap": true
+      },
+      {
+          "type": "TextBlock",
+          "size": "Medium",
+          "weight": "Bolder",
+          "text": "Citations:",
+          "style": "heading",
+          "wrap": true
+      }
+  ],
+  "actions": [
+      {
+          "type": "Action.OpenUrl",
+          "title": "${name}",
+          "url": "${path}",
+          "role": "button"
+      }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4"
+}

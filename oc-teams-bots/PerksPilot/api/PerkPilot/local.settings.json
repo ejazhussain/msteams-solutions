@@ -1,0 +1,21 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "StorageConnectionString": "{{REPLACE}}",
+    "ChatHistoryTableName": "ChatHistory",
+    
+    "SearchServiceEndPoint": "https://{{REPLACE}}.search.windows.net",    
+    "SearchIndexName": "perkspilot-index",    
+    "SearchServiceQueryApiKey": "{{REPLACE}}",
+
+    "Azure:OpenAI:Endpoint": "https://{{REPLACE}}.openai.azure.com/",
+    "Azure:OpenAI:ApiKey": "",
+    "Azure:OpenAI:Model": "gpt-35-turbo"
+  },
+  "Host": {
+    "LocalHttpPort": 7293,
+    "CORS": "*"
+  }
+}
