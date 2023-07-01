@@ -51,8 +51,7 @@ namespace PerkPilot
                 prompt = prompt ?? data?.prompt;
                 string userId = data?.userId;
                 string userName = data?.userName;
-                bool reset = data?.reset;
-                
+                bool reset = data?.reset;                
                                 
                 //Search document using Azure Cognitive search
                 string SearchServiceEndPoint = Environment.GetEnvironmentVariable("SearchServiceEndPoint");
@@ -61,30 +60,12 @@ namespace PerkPilot
                 SearchClient searchClient = new SearchClient(new Uri(SearchServiceEndPoint), SearchIndexName, new AzureKeyCredential(SearchServiceQueryApiKey));
                 List<SearchResult> cogSearchResponse = await new AzureSearchService().QueryDocumentsAsync(searchClient, prompt);
                 var cogResult = cogSearchResponse.Count > 0 ? cogSearchResponse.FirstOrDefault() : new SearchResult();
-
-                //Chat History
-                string ChatHistoryTableName = Environment.GetEnvironmentVariable("ChatHistoryTableName");                
-                CloudTable table = await AzureTableHelper.CreateTableAsync(ChatHistoryTableName);
-                string PreviousMessagesKey = "PreviousMessage";
-                if (reset)
-                {
-                    var msgEntity = new MessageEntity(userId, PreviousMessagesKey)
-                    {
-                        ETag = "*"
-                    };
-                    await AzureTableHelper.DeleteEntityAsync(table, msgEntity);
-                    return new OkObjectResult("your chat has been reset");
-                }
-                var chatHistory = await ChatHelper.GetPreviousMessages(userId, PreviousMessagesKey, table);
-
+                                
                 //Azure Open AI configurations
                 var messages = new List<ChatMessage>
             {
                 //System
-                new ChatMessage(ChatRole.System, AppConstants.ThoughtProcessPrompt),
-
-                //history
-                new ChatMessage(ChatRole.Assistant, string.IsNullOrEmpty(chatHistory.ChatResponse) ? string.Empty : chatHistory.ChatResponse ),                
+                new ChatMessage(ChatRole.System, AppConstants.ThoughtProcessPrompt),                              
 
                 //Azure Cognitive search results
                 new ChatMessage(ChatRole.Assistant, string.IsNullOrEmpty(cogResult.Content) ? "" : cogResult.Content),
@@ -117,14 +98,7 @@ namespace PerkPilot
                 AzureOpenAIModel,
                 chatCompletionOptions);
                 var azureOpenAIResponse = chatCompletionsResponse.Value.Choices.Count > 0 ? chatCompletionsResponse.Value.Choices.FirstOrDefault().Message.Content.ToString() : "no data";
-
-                var messageEntity = new MessageEntity(userId, PreviousMessagesKey)
-                {
-                    ChatResponse = azureOpenAIResponse,
-                    ChatQuestion  = prompt
-                };
-                var insertedMessage = await AzureTableHelper.InsertOrMergeEntityAsync(table, messageEntity);
-
+                
                 //response
                 cogResult.OpenAISummary = azureOpenAIResponse;
                 return new OkObjectResult(cogResult);
